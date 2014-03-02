@@ -1,5 +1,7 @@
 package com.buildmonkey.terminal.jFiglet;
 import java.util.*;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 import java.net.*;
 import java.io.*;
 
@@ -151,20 +153,52 @@ public class FigletFont {
 		}
 	}
 
+	private static int readInputStream( final InputStream is ) throws IOException {
+		final byte[] buf = new byte[ 8192 ];
+		int read = 0;
+		int cntRead;
+		while ( ( cntRead = is.read( buf, 0, buf.length ) ) >=0  )
+		{
+			read += cntRead;
+		}
+		return read;
+	}
+
 	public static String convertOneLineAsFont(String fontFile, String message)  {
 		String result = "";
 
 		FigletFont figletFont;
 		try {
-			InputStream stream = FigletFont.class.getClassLoader().getResourceAsStream( fontFile + ".flf" );
-			figletFont = new FigletFont(stream);
-			for (int l = 0; l < figletFont.height; l++) { // for each line
-				for (int c = 0; c < message.length(); c++)
-					// for each char
-					result += figletFont.getCharLineString((int) message.charAt(c), l);
-				result += '\n';
-			}
+			// InputStream stream = FigletFont.class.getClassLoader().getResourceAsStream( fontFile + ".flf" );
 
+			final ZipFile file = new ZipFile( Thread.currentThread().getContextClassLoader().getResource( "terminalFontPack001.zip").getFile() );
+			try
+			{
+				final Enumeration<? extends ZipEntry> entries = file.entries();
+				while ( entries.hasMoreElements() )
+				{
+					final ZipEntry entry = entries.nextElement();
+					// DEBUG: System.out.println( entry.getName() );
+					// use entry input stream:
+					readInputStream( file.getInputStream( entry ) );
+					// Lets find the file we want from the zip library
+					if (entry.getName().endsWith(fontFile+".flf")){
+						System.out.println(entry.toString()+" Found It!");
+						InputStream streamedFont = file.getInputStream( entry );
+						figletFont = new FigletFont(streamedFont);
+						for (int l = 0; l < figletFont.height; l++) { // for each line
+							for (int c = 0; c < message.length(); c++)
+								// for each char
+								result += figletFont.getCharLineString((int) message.charAt(c), l);
+							result += '\n';
+						}
+					}
+				}
+			}
+			finally
+			{
+				file.close();
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -185,7 +219,6 @@ public class FigletFont {
 					result += figletFont.getCharLineString((int) message.charAt(c), l);
 				result += '\n';
 			}
-
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -207,6 +240,10 @@ public class FigletFont {
 	public static void main(String[] args) throws Exception {
 		String text = "JFIGLET";
 		String filename = "standard";
+		//String filename = "slant";
+		//String filename = "train";
+		//String filename = "standard";
+		//String filename = "standard";
 
 		if (args.length < 1) {
 			System.out.println("Usage: java -jar jfiglet.jar <text-to-convert> (or) java -jar jfiglet.jar <font-flf-file> <text-to-convert>");

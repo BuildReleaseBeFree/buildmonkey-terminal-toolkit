@@ -4,6 +4,8 @@ import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
+import com.buildmonkey.terminal.jFiglet.FigletFont;
+
 
 
 
@@ -22,13 +24,31 @@ public class HelloWorld {
 	    return read;
 	}
 	
-	
+	public static String convertOneLineAsFont(String fontFile, String message)  {
+		String result = "";
+
+		FigletFont figletFont;
+		try {
+			InputStream stream = FigletFont.class.getClassLoader().getResourceAsStream( fontFile + ".flf" );
+			figletFont = new FigletFont(stream);
+			for (int l = 0; l < figletFont.height; l++) { // for each line
+				for (int c = 0; c < message.length(); c++)
+					// for each char
+					result += figletFont.getCharLineString((int) message.charAt(c), l);
+				result += '\n';
+			}
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
 	
     public static void main(String[] args) throws IOException { 
-        System.out.println("Hello, World");
+    	String find = "standard";
+    	
         System.out.println(Thread.currentThread().getContextClassLoader().getResource( "terminalFontPack001.zip"));
-		
-        
         
     	final ZipFile file = new ZipFile( Thread.currentThread().getContextClassLoader().getResource( "terminalFontPack001.zip").getFile() );
     	try
@@ -40,7 +60,11 @@ public class HelloWorld {
     	        System.out.println( entry.getName() );
     	        //use entry input stream:
     	        readInputStream( file.getInputStream( entry ) );
-    	        System.out.println(entry.toString());
+    	        if (entry.getName().endsWith(find+".flf")){
+    	        	  System.out.println(entry.toString()+" Found It!");
+    	        	  InputStream streamedFont = file.getInputStream( entry );
+    	        	  figletFont = new FigletFont(streamedFont);
+    	        }
     	    }
     	}
     	finally
