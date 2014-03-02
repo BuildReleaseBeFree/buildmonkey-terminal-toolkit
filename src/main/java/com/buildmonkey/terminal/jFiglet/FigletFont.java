@@ -182,7 +182,7 @@ public class FigletFont {
 					readInputStream( file.getInputStream( entry ) );
 					// Lets find the file we want from the zip library
 					if (entry.getName().endsWith(fontFile+".flf")){
-						System.out.println(entry.toString()+" Found It!");
+						// System.out.println(entry.toString()+" Found It!");
 						InputStream streamedFont = file.getInputStream( entry );
 						figletFont = new FigletFont(streamedFont);
 						for (int l = 0; l < figletFont.height; l++) { // for each line
@@ -237,11 +237,16 @@ public class FigletFont {
 	 * @throws Exception
 	 */
 	public static void main(String[] args) throws Exception {
-		String text = "JFIGLET2";
+		String text = "jFiglet";
+		//  These are in both the pack and directly on the classpath
 		//String filename = "standard";
 		//String filename = "slant";
-		//String filename = "train";
-		String filename = "linux";
+		
+		// This is JUST on the classpath
+		String filename = "train";
+		
+		// These are JUST in the pack
+		//String filename = "linux";
 		//String filename = "letters";
 
 		if (args.length < 1) {

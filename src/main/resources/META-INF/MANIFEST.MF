@@ -1,1 +1,2 @@
 Main-Class: com.buildmonkey.terminal.jFiglet.FigletFont
+Class-path: terminalFontPack001.dat
