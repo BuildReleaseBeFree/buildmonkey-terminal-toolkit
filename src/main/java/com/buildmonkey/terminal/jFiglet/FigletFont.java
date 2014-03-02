@@ -169,7 +169,8 @@ public class FigletFont {
 		FigletFont figletFont;
 		try {
 			// InputStream stream = FigletFont.class.getClassLoader().getResourceAsStream( fontFile + ".flf" );
-			final ZipFile file = new ZipFile( Thread.currentThread().getContextClassLoader().getResource( "terminalFontPack001.zip").getFile() );
+			final ZipFile file = new ZipFile( Thread.currentThread().getContextClassLoader().getResource( "terminalFontPack001.dat").getFile() );
+			//final ZipFile file = new ZipFile( FigletFont.class.getClassLoader().getResourceAsStream( "terminalFontPack001.dat") );
 			try
 			{
 				final Enumeration<? extends ZipEntry> entries = file.entries();
@@ -236,12 +237,12 @@ public class FigletFont {
 	 * @throws Exception
 	 */
 	public static void main(String[] args) throws Exception {
-		String text = "JFIGLET";
-		String filename = "standard";
+		String text = "JFIGLET2";
+		//String filename = "standard";
 		//String filename = "slant";
 		//String filename = "train";
-		//String filename = "standard";
-		//String filename = "standard";
+		String filename = "linux";
+		//String filename = "letters";
 
 		if (args.length < 1) {
 			System.out.println("Usage: java -jar jfiglet.jar <text-to-convert> (or) java -jar jfiglet.jar <font-flf-file> <text-to-convert>");
