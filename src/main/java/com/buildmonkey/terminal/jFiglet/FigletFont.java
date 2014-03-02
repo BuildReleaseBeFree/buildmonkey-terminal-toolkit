@@ -166,11 +166,9 @@ public class FigletFont {
 
 	public static String convertOneLineAsFont(String fontFile, String message)  {
 		String result = "";
-
 		FigletFont figletFont;
 		try {
 			// InputStream stream = FigletFont.class.getClassLoader().getResourceAsStream( fontFile + ".flf" );
-
 			final ZipFile file = new ZipFile( Thread.currentThread().getContextClassLoader().getResource( "terminalFontPack001.zip").getFile() );
 			try
 			{
