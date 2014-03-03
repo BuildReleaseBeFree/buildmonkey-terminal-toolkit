@@ -170,6 +170,9 @@ public class FigletFont {
 		try {
 			// InputStream stream = FigletFont.class.getClassLoader().getResourceAsStream( fontFile + ".flf" );
 			final ZipFile file = new ZipFile( Thread.currentThread().getContextClassLoader().getResource( "terminalFontPack001.dat").getFile() );
+			
+			//ZipFile file = new ZipFile( ClassLoader.getResource( "terminalFontPack001.dat").getFile() );
+			//final ZipFile file = new ZipFile( Class.getResource( "terminalFontPack001.dat").getFile() );
 			//final ZipFile file = new ZipFile( FigletFont.class.getClassLoader().getResourceAsStream( "terminalFontPack001.dat") );
 			try
 			{
@@ -177,12 +180,14 @@ public class FigletFont {
 				while ( entries.hasMoreElements() )
 				{
 					final ZipEntry entry = entries.nextElement();
-					// DEBUG: System.out.println( entry.getName() );
+					// DEBUG:
+					// System.out.println( entry.getName() );
 					// use entry input stream:
 					readInputStream( file.getInputStream( entry ) );
 					// Lets find the file we want from the zip library
 					if (entry.getName().endsWith(fontFile+".flf")){
-						// System.out.println(entry.toString()+" Found It!");
+						// DEBUG:
+						System.out.println(entry.toString()+" Found It!");
 						InputStream streamedFont = file.getInputStream( entry );
 						figletFont = new FigletFont(streamedFont);
 						for (int l = 0; l < figletFont.height; l++) { // for each line
@@ -239,14 +244,18 @@ public class FigletFont {
 	public static void main(String[] args) throws Exception {
 		String text = "jFiglet";
 		//  These are in both the pack and directly on the classpath
-		//String filename = "standard";
+		// String filename = "standard";
 		//String filename = "slant";
-		
+
 		// This is JUST on the classpath
-		String filename = "train";
-		
+		//String filename = "train";
+
 		// These are JUST in the pack
 		//String filename = "linux";
+		//String filename = "letters";
+		//String filename = "small";
+		String filename = "mini";
+		//String filename = "letters";
 		//String filename = "letters";
 
 		if (args.length < 1) {
