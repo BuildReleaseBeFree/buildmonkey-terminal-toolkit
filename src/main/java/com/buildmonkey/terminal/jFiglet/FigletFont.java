@@ -150,6 +150,50 @@ public class FigletFont {
 			System.out.println("IO Error: " + e.getMessage());
 		}
 	}
+	
+	public static String listAllFonts()  {
+        //Fetch all the environment variables.  
+        Map<String,String> enviornmentVariables = System.getenv();  
+          
+        //Fetch classpath  
+        String classPath = enviornmentVariables.get("CLASSPATH");  
+          
+        //Split based on ";"  
+        String[] arrayOfClassPathVariables = classPath.split(";");  
+          
+          
+        int i=0;  
+        //Lopp through array to filter   
+        while(i<arrayOfClassPathVariables.length){  
+              
+            //Use your pattern in this if condition  
+            if(arrayOfClassPathVariables[i].matches("*flf")){  
+                //Load it using resource bundle  
+            	System.out.println(arrayOfClassPathVariables[i].toString());
+            }  
+            i++;  
+        }  
+		
+		String result = "";
+
+		FigletFont figletFont;
+		try {
+			Enumeration<URL> listURLs = FigletFont.class.getClassLoader().getResources( "*flf" );
+			//Enumeration<URL> listFILES = ClassLoader.getResources("*flf");
+			
+			while (listURLs.hasMoreElements()){
+				Object element = listURLs.nextElement();
+				// process element
+				System.out.println(element.toString());
+			}
+
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
 
 	public static String convertOneLineAsFont(String fontFile, String message)  {
 		String result = "";
@@ -192,6 +236,32 @@ public class FigletFont {
 		}
 		return result;
 	}
+	
+	public static void findFileOnClassPath() {
+		final String classpath = System.getProperty("java.class.path");
+		final String pathSeparator = System.getProperty("path.separator");
+		final StringTokenizer tokenizer = new StringTokenizer(classpath, pathSeparator);
+		while (tokenizer.hasMoreTokens()) {
+			final String pathElement = tokenizer.nextToken();
+			final File directoryOrJar = new File(pathElement);
+			System.out.println(pathElement);
+//			
+//			final File absoluteDirectoryOrJar = directoryOrJar.getAbsoluteFile();
+//			if (absoluteDirectoryOrJar.isFile()) {
+//				final File target = new File(absoluteDirectoryOrJar.getParent(), fileName);
+//				if (target.exists()) {
+//					return target;
+//				} else {
+//					target = new File(directoryOrJar, fileName);
+//					if (target.exists()) {
+//						return target;
+//					}
+//				} return null;
+//			}
+
+		}
+		
+	}
 
 	/**
 	 * This is the main method which enables command-line usage
@@ -206,7 +276,13 @@ public class FigletFont {
 	 */
 	public static void main(String[] args) throws Exception {
 		String text = "JFIGLET";
-		String filename = "standard";
+		//String filename = "standard";
+		//String filename = "chunky";
+		String filename = "bulbhead";
+		//String filename = "mini";
+		//String filename = "pepper";
+		//String filename = "small";
+		//String filename = "thin";
 
 		if (args.length < 1) {
 			System.out.println("Usage: java -jar jfiglet.jar <text-to-convert> (or) java -jar jfiglet.jar <font-flf-file> <text-to-convert>");
@@ -218,6 +294,13 @@ public class FigletFont {
 			text = args[0];
 		}
 		System.out.println(convertOneLineAsFont(filename , text));
+		//listAllFonts();
+		
+		findFileOnClassPath();
+		
+		
+		
+		
 	}
 
 
