@@ -311,12 +311,12 @@ public class FigletFont {
         //InputStream stream = FigletFont.class.getClassLoader().getResourceAsStream("standard.flf");
         //figletFont = new FigletFont(stream);
 
-        System.out.println(convertOneLineAsFont(filename , text));
+/*        System.out.println(convertOneLineAsFont(filename , text));
         System.out.println(convertOneLineAsFont("mini" , text));
         System.out.println(convertOneLineAsFont("test/1row" , text));
         System.out.println(convertOneLineAsFont("test/alpha" , text));
         System.out.println(convertOneLineAsFont("test/arrows" , text));
-        System.out.println(convertOneLineAsFont("pepper" , text));
+        System.out.println(convertOneLineAsFont("pepper" , text));*/
 
         String[] fonts = Classpath.getMatchingExtensionFileNames("flf");
 
