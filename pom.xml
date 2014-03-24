@@ -59,6 +59,11 @@
   </properties>
 
   <dependencies>
+      <dependency>
+          <groupId>net.sf.corn</groupId>
+          <artifactId>corn-cps</artifactId>
+          <version>1.0.1</version>
+      </dependency>
   </dependencies>
   <build>
     <plugins>
@@ -68,7 +73,6 @@
         <version>1.2.1</version>
         <configuration>
           <mainClass>com.buildmonkey.terminal.jFiglet.FigletFont</mainClass>
-
         </configuration>
       </plugin>
 
@@ -82,6 +86,98 @@
           </archive>
         </configuration>
       </plugin>
+
+<!--
+      <plugin>
+        <groupId>com.googlecode.maven-download-plugin</groupId>
+        <artifactId>maven-download-plugin</artifactId>
+        <version>1.1.0</version>
+        <executions>
+          <execution>
+            <id>install-jbpm</id>
+            <phase>validate</phase>
+            <goals>
+              <goal>wget</goal>
+            </goals>
+            <configuration>
+              <url>http://www.jave.de/figlet/figletfonts40.zip</url>
+              <unpack>true</unpack>
+              <outputDirectory>${project.build.directory}/resource-process/java-de-figlet</outputDirectory>
+            </configuration>
+          </execution>
+          <execution>
+            <id>install-font2</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>wget</goal>
+            </goals>
+            <configuration>
+              <url>http://www.figlet.org/fonts/*.flf</url>
+              <unpack>false</unpack>
+              <outputDirectory>${project.build.directory}/resource-process/figlet-org</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+-->
+<!--
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>unpack</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>unpack</goal>
+            </goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>yourSourceGroup</groupId>
+                  <artifactId>yourSourceArtifact</artifactId>
+                  <version>1.0.0</version>
+                  <type>jar</type>
+                  <includes>${project.build.directory}/resource-process/java-de-figlet/**.*</includes>
+                  <outputDirectory>${project.build.directory}/out-fonts</outputDirectory>
+                </artifactItem>
+              </artifactItems>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+-->
+<!-- 
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>1.7</version>
+        <executions>
+          <execution>
+            <phase>initialize</phase>
+            <configuration>
+              <target unless="maven.test.skip">
+                <echo message="To skip me, just call mvn -Dmaven.test.skip=true"/>
+                <unzip dest="${project.build.directory}/out-fonts/">
+                  <patternset>
+                    <include name="**/*.flf"/>
+                    <exclude name="**/Test*.java"/>
+                  </patternset>
+                  <fileset dir="${project.build.directory}/resource-process/java-de-figlet/">
+                    <include name="**/*.flf"/>
+                    <exclude name="**/tmp*.zip"/>
+                  </fileset>
+                </unzip>
+              </target>
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+-->
 
 
     </plugins>
