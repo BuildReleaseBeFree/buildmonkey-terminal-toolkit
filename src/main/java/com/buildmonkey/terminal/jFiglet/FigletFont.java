@@ -1,7 +1,11 @@
 package com.buildmonkey.terminal.jFiglet;
+
+import net.sf.corn.cps.CPScanner;
+
 import java.util.*;
 import java.net.*;
 import java.io.*;
+
 
 /**
  * FigletFont implementation. A single static method call will create the ascii
@@ -161,13 +165,13 @@ public class FigletFont {
         //Split based on ";"  
         String[] arrayOfClassPathVariables = classPath.split(";");  
           
-          
+
         int i=0;  
         //Lopp through array to filter   
         while(i<arrayOfClassPathVariables.length){  
               
             //Use your pattern in this if condition  
-            if(arrayOfClassPathVariables[i].matches("*flf")){  
+            if(arrayOfClassPathVariables[i].matches("f$")){
                 //Load it using resource bundle  
             	System.out.println(arrayOfClassPathVariables[i].toString());
             }  
@@ -185,6 +189,7 @@ public class FigletFont {
 				Object element = listURLs.nextElement();
 				// process element
 				System.out.println(element.toString());
+
 			}
 
 
@@ -245,10 +250,10 @@ public class FigletFont {
 			final String pathElement = tokenizer.nextToken();
 			final File directoryOrJar = new File(pathElement);
 			System.out.println(pathElement);
-//			
+
 //			final File absoluteDirectoryOrJar = directoryOrJar.getAbsoluteFile();
 //			if (absoluteDirectoryOrJar.isFile()) {
-//				final File target = new File(absoluteDirectoryOrJar.getParent(), fileName);
+//				final File target = new File(absoluteDirectoryOrJar.getParent());
 //				if (target.exists()) {
 //					return target;
 //				} else {
@@ -276,13 +281,22 @@ public class FigletFont {
 	 */
 	public static void main(String[] args) throws Exception {
 		String text = "JFIGLET";
-		//String filename = "standard";
-		//String filename = "chunky";
-		String filename = "bulbhead";
+		// String filename = "standard";
+		String filename = "chunky";
+		// String filename = "bulbhead";
 		//String filename = "mini";
 		//String filename = "pepper";
 		//String filename = "small";
 		//String filename = "thin";
+
+
+
+        // List<URL> resources = CPScanner.scanResources(new ResourceFilter().packageName("net.sf.corn.cps.sample").resourceName("*.flf"));
+        //List<URL> resources = CPScanner.scanResources(ResourceFilter().packageName("net.sf.corn.cps.sample").resourceName("*.flf"));
+
+     //   List<URL> resources = CPScanner.scanResources(new ResourceFilter().packageName("net.sf.corn.cps.sample").resourceName("*.xml"));
+
+        //findFileOnClassPath();
 
 		if (args.length < 1) {
 			System.out.println("Usage: java -jar jfiglet.jar <text-to-convert> (or) java -jar jfiglet.jar <font-flf-file> <text-to-convert>");
@@ -293,10 +307,54 @@ public class FigletFont {
 		else {
 			text = args[0];
 		}
-		System.out.println(convertOneLineAsFont(filename , text));
+
+        //InputStream stream = FigletFont.class.getClassLoader().getResourceAsStream("standard.flf");
+        //figletFont = new FigletFont(stream);
+
+        System.out.println(convertOneLineAsFont(filename , text));
+        System.out.println(convertOneLineAsFont("mini" , text));
+        System.out.println(convertOneLineAsFont("test/1row" , text));
+        System.out.println(convertOneLineAsFont("test/alpha" , text));
+        System.out.println(convertOneLineAsFont("test/arrows" , text));
+        System.out.println(convertOneLineAsFont("pepper" , text));
+
+        String[] fonts = Classpath.getMatchingExtensionFileNames("flf");
+
+        for(int j=0; j<fonts.length;j++) {
+            for (int i = j + 1; i < fonts.length; i++) {
+                if (fonts[i].compareTo(fonts[j]) < 0) {
+                    String temp = fonts[j];
+                    fonts[j] = fonts[i];
+                    fonts[i] = temp;
+
+
+                }
+            }
+        }
+
+        for ( String name : fonts ) {
+            String filenameToRender = name.replace("." , "/");
+            System.out.println(name);
+            //System.out.println(convertOneLineAsFont(filenameToRender , text));
+            System.out.println(convertOneLineAsFont(filenameToRender , "abcdefghijklmnopqrstuvwxyz"));
+        }
+        System.out.println("boo");
+        System.out.println(listAllFonts());
+        System.out.println("boo");
+
+   /*     System.out.println(FigletFont.class.getClassLoader().getResources(""));
+
+        Enumeration<URL> enumeration = FigletFont.class.getClassLoader().getResources("");
+        System.out.println(enumeration.nextElement());
+        while (enumeration.hasMoreElements()) {
+            Object element =  enumeration.nextElement();
+            // process element
+            System.out.println(element.toString());
+        }*/
+
 		//listAllFonts();
 		
-		findFileOnClassPath();
+
 		
 		
 		
