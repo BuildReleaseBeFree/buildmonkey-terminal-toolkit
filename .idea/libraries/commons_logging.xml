@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="commons-logging">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/charva/java/lib/commons-logging.jar!/" />
+      <root url="jar://$PROJECT_DIR$/charva/java/lib/commons-logging-api.jar!/" />
+      <root url="jar://$PROJECT_DIR$/charva/java/lib/log4j-1.2.8.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

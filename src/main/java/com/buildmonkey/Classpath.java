@@ -1,15 +1,12 @@
-package com.buildmonkey.terminal.jFiglet;
+package com.buildmonkey;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.zip.ZipEntry;
@@ -17,9 +14,8 @@ import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
 
 /**
- * You are free to use this code however you
- * like but I assume no responsibility for it's
- * correctness and provide no warranty of any kind.
+ * You are free to use this code however you like but I assume no responsibility for it's correctness and provide
+ * no warranty of any kind.
  *
  * @author Michael Connor
  *
@@ -29,35 +25,29 @@ public class Classpath {
 
     public static interface FileFilter {
         /**
-         * All paths will be represented
-         * using forward slashes and no
-         * files will begin with a slash
+         * All paths will be represented using forward slashes and no files will begin with a slash
          */
         public boolean accept(String filename);
     }
 
     /**
-     * Returns a list of the classes on the
-     * classpath.  The names returned will
-     * be appropriate for using Class.forName(String)
-     * in that the slashes will be changed to dots
-     * and the .class file extension will be removed.
+     * Returns a list of the classes on the classpath.  The names returned will be appropriate for using
+     * Class.forName(String) in that the slashes will be changed to dots and the .class file extension will be removed.
      */
     public static String[] getClasspathClassNames()
             throws ZipException, IOException {
-        String[] classes = getClasspathFileNamesWithExtension(".class");
+        String[] classes = getClasspathFileNamesWithExtension( ".class" );
         for ( int i = 0; i < classes.length; i++ ) {
-            classes[i] = classes[i].substring(0, classes[i].length() - 6).replace("/",".");
+            classes[i] = classes[i].substring( 0, classes[i].length() - 6 ).replace( "/", "." );
         }
         return classes;
     }
 
-    public static String[] getMatchingExtensionFileNames(String extension)
+    public static String[] getClasspathEntitysWithExtension(String extension)
             throws ZipException, IOException {
-        String[] classes = getClasspathFileNamesWithExtension("." + extension );
+        String[] classes = getClasspathFileNamesWithExtension( "."+extension );
         for ( int i = 0; i < classes.length; i++ ) {
-            // classes[i] = classes[i].substring(0, classes[i].length() - 4).replace("/",".");
-            classes[i] = classes[i].substring(0, classes[i].length() - 4 ).replace("/",".");
+            classes[i] = classes[i].substring( 0, classes[i].length() - 4 ).replace( "/", "." );
         }
         return classes;
     }
@@ -66,7 +56,7 @@ public class Classpath {
             throws ZipException, IOException {
         return getClasspathFileNames( new FileFilter() {
             public boolean accept(String filename) {
-                return filename.endsWith(extension);
+                return filename.endsWith( extension );
             }
         });
     }
@@ -75,19 +65,16 @@ public class Classpath {
             throws ZipException, IOException {
         List filenames = new ArrayList();
         for ( String filename : getClasspathFileNames() ) {
-            if ( filter.accept(filename) ) {
-                filenames.add(filename);
+            if ( filter.accept( filename ) ) {
+                filenames.add( filename );
             }
         }
-        return (String[]) filenames.toArray(new String[filenames.size()]);
+        return ( String[] ) filenames.toArray( new String[ filenames.size() ] );
     }
 
     /**
-     * Returns the fully qualified class names of
-     * all the classes in the classpath.  Checks
-     * directories and zip files.  The FilenameFilter
-     * will be applied only to files that are in the
-     * zip files and the directories.  In other words,
+     * Returns the fully qualified class names of all the classes in the classpath.  Checks directories and zip files.
+     * The FilenameFilter will be applied only to files that are in the zip files and the directories.  In other words,
      * the filter will not be used to sort directories.
      */
     public static String[] getClasspathFileNames() throws ZipException, IOException {
@@ -152,7 +139,7 @@ public class Classpath {
 //            System.out.println(name);
 //        }
 
-        String[] fonts = getMatchingExtensionFileNames("flf");
+        String[] fonts = getClasspathEntitysWithExtension("flf");
         for ( String name : fonts ) {
             System.out.println(name);
         }
