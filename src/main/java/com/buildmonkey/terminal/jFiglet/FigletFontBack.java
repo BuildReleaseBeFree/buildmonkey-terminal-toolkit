@@ -11,7 +11,7 @@ import java.io.*;
  * https://github.com/lalyos/jfiglet/blob/master/figfont.txt
  * 
  * <pre>
- * <code>String asciiArt = FigletFont.convertOneLine("hello");</code>
+ * <code>String asciiArt = FigletFont.getBanner("hello");</code>
  * </pre>
  * 
  * Originally found at: http://www.rigaut.com/benoit/CERN/FigletJava/. Moved to

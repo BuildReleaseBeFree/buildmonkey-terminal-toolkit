@@ -63,13 +63,13 @@ public class Classpath {
 
     public static String[] getClasspathFileNames(FileFilter filter)
             throws ZipException, IOException {
-        List filenames = new ArrayList();
+        List fileNames = new ArrayList();
         for ( String filename : getClasspathFileNames() ) {
             if ( filter.accept( filename ) ) {
-                filenames.add( filename );
+                fileNames.add( filename );
             }
         }
-        return ( String[] ) filenames.toArray( new String[ filenames.size() ] );
+        return ( String[] ) fileNames.toArray( new String[ fileNames.size() ] );
     }
 
     /**
@@ -134,10 +134,10 @@ public class Classpath {
     }
 
     public static void main (String[] args) throws Exception {
-//        String[] names = getClasspathClassNames();
-//        for ( String name : names ) {
-//            System.out.println(name);
-//        }
+        String[] names = getClasspathClassNames();
+        for ( String name : names ) {
+            System.out.println(name);
+        }
 
         String[] fonts = getClasspathEntitysWithExtension("flf");
         for ( String name : fonts ) {
