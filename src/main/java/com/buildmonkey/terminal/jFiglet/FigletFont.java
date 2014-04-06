@@ -50,8 +50,8 @@ public class FigletFont {
      * @param c The numerical id of the character.
      * @return The definition of a single character.
      */
-    public char[][] getChar(int c) {
-        return font[c];
+    public char[][] getChar( int c ) {
+        return font[ c ];
     }
 
     /**
@@ -149,9 +149,15 @@ public class FigletFont {
         }
     }
 
-    public static String listAllFonts() throws Exception {
+    public static String[] getStringArrayOfFonts() throws Exception {
         // Get an array of fonts
         String[] fonts = Classpath.getClasspathEntitysWithExtension( "flf" );
+        // Lets remove the 'font.' from the start that we get as its in a fonts directory
+        fonts = typeHelpers.replaceFirstStringInEachStringInStringArrayOfStrings( fonts, "fonts.", "" );
+        return fonts;
+    }
+    public static String getListOfFonts() throws Exception {
+        String[] fonts = getStringArrayOfFonts();
         // Sort the list
         typeHelpers.sortStringArrayOfStringsCaseInsensitiveOrder( fonts );
         String listToReturn = "";
@@ -176,12 +182,13 @@ public class FigletFont {
                 // for each line
                 for ( int c = 0; c < message.length(); c++ )
                     // for each char
-                    result += figletFont.getCharLineString( (int) message.charAt( c ), l );
+                    result += figletFont.getCharLineString( ( int ) message.charAt( c ), l );
                 result += '\n';
             }
 
         } catch ( Exception e ) {
             // TODO Auto-generated catch block
+            // Need to have try-catch or everything that uses this will need it (if they just throw an Exception)
             e.printStackTrace();
         }
         return result;
@@ -256,13 +263,39 @@ public class FigletFont {
         //String font = "linux";
         String font = "3d_diagonal";
         //String font = "funfaces";
+
         //String font = "standard";
-        //String font = "standard";
-        //String font = "bear";
-        //String font = "funface";
+
+        //String font = "chunky";
+        //String font = "crawford";
+        //String font = "cricket";
+        //String font = "cyberlarge";
+        //String font = "cybersmall";
+        //String font = "digital";
+        //String font = "double";
+        //String font = "doubleshorts";
+        //String font = "drpepper";
+        //String font = "puzzle";
+        //String font = "rammstein";
+        //String font = "rectangles";
+        //String font = "red_phoenix";
+        //String font = "script";
+        //String font = "small";
+        //String font = "smkeyboard";
+        //String font = "tombstone";
+        //String font = "train"; mini
+        //String font = "mini";
+
+        //String font = "script";
         //System.out.println(getBannerMaxWidth(headingText, textWidth));
         //System.out.println( getBannerAsFontMaxWidth( font, textWidth, headingText ) );
         System.out.println( getBannerAsFontMaxWidth( font, textWidth, longSample ) );
+
+        System.out.println( getBannerAsFontMaxWidth( "twisted",160, "Hcom modules XyZ modules" ) );
+
+        System.out.println( getBannerAsFontMaxWidth( "chunky", textWidth, longSample ) );
+        System.out.println( getBannerAsFontMaxWidth( "drpepper", textWidth, longSample ) );
+        System.out.println( getBannerAsFontMaxWidth( "puzzle", textWidth, longSample ) );
     }
 }
 

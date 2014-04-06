@@ -27,6 +27,8 @@ public class CommandLineLauncher {
         String usage = "Usage:\n" +
                 "\n" +
                 "   -h  (or) --help (or) -?                 Display this usage screen\n" +
+                "   -w  (or) --width                        Set the display width in characters\n" +
+                "                                           before starting a new line\n" +
                 "   -l  (or) --list                         List all fonts available\n" +
                 "   -a  (or) --display-all                  Display ALL fonts with sample\n" +
                 "   -s  (or) --sample-font [FONT]           Sample particular [FONT]\n" +
@@ -76,7 +78,7 @@ public class CommandLineLauncher {
                     // Lets remove the 'font.' from the start that we get as its in a fonts directory
                     fonts = typeHelpers.replaceFirstStringInEachStringInStringArrayOfStrings( fonts, "fonts.", "");
                     // List all fonts in a fixed width Table of Columns
-                    Column.renderStringArrayAsColumnsOnFixedWidthTerminal( 240, fonts );
+                    Column.renderStringArrayAsColumnsOnFixedWidthTerminal( 80, fonts );
                     // Lets make an ArrayList full of the fonts in our StringArray so that we can add to it
                     System.out.println( "\nCurrently "+fonts.length+" fonts available to select from..."   );
                 }
@@ -158,7 +160,7 @@ public class CommandLineLauncher {
                     for ( String name : fonts ) {
                         String filenameToRender = name;
                         System.out.println( name + ":" );
-                        System.out.println( FigletFont.getBannerAsFont(filenameToRender,
+                        System.out.println( FigletFont.getBannerAsFontMaxWidth(filenameToRender, maxWidth,
                                 fontTextToSample) );
                     }
                 }
