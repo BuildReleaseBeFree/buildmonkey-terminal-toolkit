@@ -17,13 +17,11 @@ public class CommandLineLauncher {
         // String textSubHeading = "Featuring Figlet style Banners";
         int maxWidth = 160;
         String textInlineHeading = "BuildMonkey Term Tools";
-        String longSample = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String longSample = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
         String shortSample = "abcdefghijklmnopqrstuvwxyz";
         // System.out.println( FigletFont.getBannerAsFont( "chunky",         textHeading         ) );
         // System.out.println( FigletFont.getBannerAsFont( "small",          textSubHeading      ) );
 
-        // Our header...
-        System.out.println( FigletFont.getBannerAsFontMaxWidth("rectangles", maxWidth, textInlineHeading) );
         String usage = "Usage:\n" +
                 "\n" +
                 "   -h  (or) --help (or) -?                 Display this usage screen\n" +
@@ -39,6 +37,8 @@ public class CommandLineLauncher {
         //Check to see if we have any args to work with
         if ( args.length == 0 )
         {
+            // Our header...
+            System.out.println( FigletFont.getBannerAsFontMaxWidth("rectangles", maxWidth, textInlineHeading) );
             System.out.println( "\nThere were no command-line arguments given..." );
             // Show usage screen...
             System.out.println( usage );
@@ -57,12 +57,16 @@ public class CommandLineLauncher {
 
                 // Look for the -h or --help or -? parameter
                 if ( argument.equals( "-h" ) || argument.equals( "--help" ) || argument.equals( "-?" ) ) {
+                    // Our header...
+                    System.out.println( FigletFont.getBannerAsFontMaxWidth("rectangles", maxWidth, textInlineHeading) );
                     // Show usage screen...
                     System.out.println( usage );
                 }
 
                 //Look for the -l or --list parameter
                 else if ( argument.equals( "-l" ) || argument.equals( "--list" ) ) {
+                    // Our header...
+                    System.out.println( FigletFont.getBannerAsFontMaxWidth("rectangles", maxWidth, textInlineHeading) );
                     System.out.println( "Fonts Available for Selection:\n" );
                     // Lets remove the 'font.' from the start that we get as its in a fonts directory
                     fonts = typeHelpers.replaceFirstStringInEachStringInStringArrayOfStrings(fonts, "fonts.", "");
@@ -74,6 +78,8 @@ public class CommandLineLauncher {
 
                 //Look for the -el or --experemental-list parameter
                 else if ( argument.equals( "-el" ) || argument.equals( "--exp-list" ) ) {
+                    // Our header...
+                    System.out.println( FigletFont.getBannerAsFontMaxWidth("rectangles", maxWidth, textInlineHeading) );
                     System.out.println( "Fonts Available for Selection:\n" );
                     // Lets remove the 'font.' from the start that we get as its in a fonts directory
                     fonts = typeHelpers.replaceFirstStringInEachStringInStringArrayOfStrings( fonts, "fonts.", "");
@@ -85,6 +91,8 @@ public class CommandLineLauncher {
 
                 //Look for the -l or --list parameter
                 else if (argument.equals("-L") || argument.equals("--long-list")) {
+                    // Our header...
+                    System.out.println( FigletFont.getBannerAsFontMaxWidth("rectangles", maxWidth, textInlineHeading) );
                     System.out.println("Fonts Available for Selection:\n");
                     // Lets remove the 'font.' from the start that we get as its in a fonts directory
                     fonts = typeHelpers.replaceFirstStringInEachStringInStringArrayOfStrings( fonts, "fonts.", "");
@@ -94,7 +102,9 @@ public class CommandLineLauncher {
 
                 //Look for the -a or --display-all parameter
                 else if (argument.equals( "-a" ) || argument.equals( "--display-all" ) ) {
-                    System.out.println( "\n" );
+                    // Our header...
+                    System.out.println( FigletFont.getBannerAsFontMaxWidth("rectangles", maxWidth, textInlineHeading) );
+                    System.out.println( "Complete Sample of all Numbers, Upper and Lower case characters in all fonts:" );
                     // Lets remove the 'font.' from the start that we get as its in a fonts directory
                     fonts = typeHelpers.replaceFirstStringInEachStringInStringArrayOfStrings( fonts, "fonts.", "");
                     // Now, for each font, lets show our sample
@@ -121,6 +131,8 @@ public class CommandLineLauncher {
 
                 //Look for the -D or --debug parameter
                 else if ( argument.equals( "-D" ) || argument.equals( "--debug" ) ) {
+                    // Our header...
+                    System.out.println( FigletFont.getBannerAsFontMaxWidth("rectangles", maxWidth, textInlineHeading) );
                     String terminalColumns = System.getenv("COLUMNS");
                     String termCol = System.getProperty("COLUMNS");
                     Properties envList = System.getProperties();
@@ -151,7 +163,8 @@ public class CommandLineLauncher {
 
                 //Look for the -S or --sample-font-as parameter
                 else if ( argument.equals( "-t" ) || argument.equals( "--sample-text" ) ) {
-                    System.out.println();
+                    // Our header...
+                    System.out.println( FigletFont.getBannerAsFontMaxWidth("rectangles", maxWidth, textInlineHeading) );
                     // Lets remove the 'font.' from the start that we get as its in a fonts directory
                     for( int j = 0; j < fonts.length; j++ ) {
                         fonts[ j ] = fonts[ j ].toString().replaceFirst( "fonts.", "" );
