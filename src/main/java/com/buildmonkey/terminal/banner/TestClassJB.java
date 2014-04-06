@@ -1,4 +1,4 @@
-package com.buildmonkey.terminal.jFiglet;
+package com.buildmonkey.terminal.banner;
 
 import com.buildmonkey.types.typeHelpers;
 

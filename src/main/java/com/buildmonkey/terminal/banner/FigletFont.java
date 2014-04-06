@@ -1,4 +1,4 @@
-package com.buildmonkey.terminal.jFiglet;
+package com.buildmonkey.terminal.banner;
 
 import com.buildmonkey.Classpath;
 import com.buildmonkey.types.typeHelpers;
@@ -21,7 +21,7 @@ import java.io.*;
  * @author Benoit Rigaut CERN July 96
  * www.rigaut.com benoit@rigaut.com
  * released with GPL the 13th of november 2000 (my birthday!)
- * FigletFont is now jFiglet
+ * FigletFont is now banner
  *
  */
 public class FigletFont {

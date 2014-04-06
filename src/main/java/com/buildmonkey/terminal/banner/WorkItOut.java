@@ -1,10 +1,8 @@
-package com.buildmonkey.terminal.jFiglet;
+package com.buildmonkey.terminal.banner;
 
 
 
 import com.buildmonkey.terminal.display.Column;
-
-import java.util.Map;
 
 /**
  * Created by v-jborkowski on 26/03/2014.

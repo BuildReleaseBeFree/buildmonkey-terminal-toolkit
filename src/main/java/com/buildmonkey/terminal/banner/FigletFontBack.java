@@ -1,8 +1,7 @@
-package com.buildmonkey.terminal.jFiglet;
+package com.buildmonkey.terminal.banner;
 import java.util.*;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
-import java.net.*;
 import java.io.*;
 
 /**
@@ -20,7 +19,7 @@ import java.io.*;
  * @author Benoit Rigaut CERN July 96
  * www.rigaut.com benoit@rigaut.com
  * released with GPL the 13th of november 2000 (my birthday!)
- * FigletFont is now jFiglet
+ * FigletFont is now banner
  *
  */
 public class FigletFontBack {
@@ -242,7 +241,7 @@ public class FigletFontBack {
 	 * @throws Exception
 	 */
 	public static void main(String[] args) throws Exception {
-		String text = "jFiglet";
+		String text = "banner";
 		//  These are in both the pack and directly on the classpath
 		// String filename = "standard";
 		//String filename = "slant";
