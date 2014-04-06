@@ -88,7 +88,7 @@
         <version>1.2.1</version>
         <configuration>
           <!-- <mainClass>com.buildmonkey.terminal.jFiglet.FigletFont</mainClass> -->
-          <mainClass>com.buildmonkey.terminal.jFiglet.CommandLineLauncher</mainClass>
+          <mainClass>com.buildmonkey.terminal.banner.CommandLineLauncher</mainClass>
         </configuration>
       </plugin>
 
