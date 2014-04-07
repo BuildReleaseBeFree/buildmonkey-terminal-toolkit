@@ -2,6 +2,7 @@ package com.buildmonkey.terminal.banner;
 
 import com.buildmonkey.Classpath;
 import com.buildmonkey.types.typeHelpers;
+import com.buildmonkey.terminal.display.displayUtils;
 
 import java.util.*;
 import java.io.*;
@@ -204,6 +205,7 @@ public class FigletFont {
         Scanner bannerScanner;
         String bannerTextToDo = "";
         String formattedBannerToReturn = "";
+        int centerOffset = 0;
         // In case we are dealing with something that is wider than our required maxWidth lets test if that is the case
         while ( typeHelpers.getLengthOfLongestLineOfString( generatedBanner ) > maxWidth ){
             // Inner while loop to pop characters onto bannerTextToDo until we have the desired width
@@ -218,8 +220,12 @@ public class FigletFont {
             }
             bannerScanner = new Scanner( generatedBanner );
             // We have a line of banner that is less than the required width, so lets output it
+            // But first, lets center our banner within our maxWidth
+            centerOffset = ( int ) Math.ceil( maxWidth -
+                    typeHelpers.getLengthOfLongestLineOfString( generatedBanner ) / 2 );
             while ( bannerScanner.hasNextLine() ) {
-                formattedBannerToReturn += bannerScanner.nextLine()+"\n";
+                formattedBannerToReturn += displayUtils.returnLineOfStrings( centerOffset, " " )+
+                        bannerScanner.nextLine()+"\n";
             }
             // And now we have flushed our output to the formattedBannerToReturn String, lets re-assign so we can cont.
             bannerText = bannerTextToDo;
